@@ -24,6 +24,7 @@ function Rocket(x, y, angle) {
 
     this.x = x;  // rightward is positive
     this.y = y;  // downward is positive
+    this.direction = angle || 0;
 
     this.velocity = {  // in polar velocity form
         speed: 0,
@@ -40,11 +41,11 @@ Rocket.prototype.throttle = function() {
 };
 
 Rocket.prototype.rotateLeft = function() {
-    this.velocity.angle -= this.manouvre;
+    this.direction -= this.manouvre;
 };
 
 Rocket.prototype.rotateRight = function() {
-    this.velocity.angle += this.manouvre;
+    this.direction += this.manouvre;
 };
 
 Rocket.prototype.update = function() {
