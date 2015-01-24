@@ -22,9 +22,6 @@ function Rocket(x, y, angle) {
     this.width = 25;
     this.height = 25;
 
-    this.gravity = 0.1;  // define here?
-
-
     this.x = x;  // rightward is positive
     this.y = y;  // downward is positive
 
@@ -32,42 +29,27 @@ function Rocket(x, y, angle) {
         speed: 0,
         angle: angle || 0  // in degree, 0 is facing upwards
     };
-
-    this.isThrottling = false;
-    this.isRotatingLeft = false;
-    this.isRotatingRight = false;
 }
 
 /********** API **********/
 Rocket.prototype.throttle = function() {
-    this.isThrottling = true;
-};
-
-Rocket.prototype.stopThrottle = function() {
-    this.isThrottling = false;
+    this.velocity.speed += this.thrust;
+    if (this.velocity.speed > this.maxSpeed) {
+        this.velocity.speed = this.maxSpeed;
+    }
 };
 
 Rocket.prototype.rotateLeft = function() {
-    console.log("LEFT");
-    this.isRotatingLeft = true;
-};
-
-Rocket.prototype.stopRotateLeft = function() {
-    this.isRotatingLeft = false;
+    this.velocity.angle -= this.manouvre;
 };
 
 Rocket.prototype.rotateRight = function() {
-    this.isRotatingRight = true;
-};
-
-Rocket.prototype.stopRotateRight = function() {
-    this.isRotatingRight = false;
+    this.velocity.angle += this.manouvre;
 };
 
 Rocket.prototype.update = function() {
     this.accountInertia();
-    this.accountGravity();
-    this.accountCommand();
+    // this.accountGravity();
     this.updatePosition();
 };
 
@@ -87,22 +69,11 @@ Rocket.prototype.accountInertia = function() {
     }
 };
 
+// CHANGE!
 Rocket.prototype.accountGravity = function() {
     var axialVelocity = this.getAxialVelocity(this.velocity);
     axialVelocity.y += this.gravity;
     this.velocity = this.getPolarVelocity(axialVelocity);
-};
-
-Rocket.prototype.accountCommand = function() {
-    if (this.isThrottling) {
-        this.velocity.speed += this.thrust;
-    }
-    if (this.isRotatingLeft) {
-        this.velocity.angle -= this.manouvre;
-    }
-    if (this.isRotatingRight) {
-        this.velocity.angle += this.manouvre;
-    }
 };
 
 Rocket.prototype.updatePosition = function() {
