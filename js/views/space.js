@@ -12,24 +12,23 @@ function SpaceView(context, space){
 
 SpaceView.prototype.render = function(){
     this.context.fillStyle = "red";
-    this.context.fillRect(5, 5, 25, 25);
+    this.context.fillRect(this.space.rocket.getX(), this.space.rocket.getY(), 25, 25);
 };
 
 SpaceView.prototype.initEventListener = function(){
     var self = this;
     document.addEventListener("keydown", function(event){
-        console.log("HERE");
         switch (event.keyCode || event.which){
             case 38: // ArrowUp
-                console.log("Up");
+                console.log("Start Thorttle");
                 self.command.throttle = true;
                 break;
             case 37: // ArrowLeft
-                console.log("Left");
+                console.log("Start Left Rotation");
                 self.command.left = true;
                 break;
             case 39: // ArrowRight
-                console.log("Right");
+                console.log("Start Right Rotation");
                 self.command.right = true;
                 break;
         };
@@ -38,16 +37,16 @@ SpaceView.prototype.initEventListener = function(){
     document.addEventListener("keyup", function(event){
         switch (event.keyCode || event.which){
             case 38: // ArrowUp
-                console.log("Up");
-                cmd.throttle = false;
+                console.log("Stop Throttle");
+                self.command.throttle = false;
                 break;
             case 37: // ArrowLeft
-                console.log("Left");
-                cmd.left = false;
+                console.log("Stop Left Rotation");
+                self.command.left = false;
                 break;
             case 39: // ArrowRight
-                console.log("Right");
-                cmd.right = false;
+                console.log("Stop Right Rotation");
+                self.command.right = false;
                 break;
         };
     });
