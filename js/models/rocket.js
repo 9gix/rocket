@@ -34,7 +34,18 @@ function Rocket(x, y, angle) {
 
 /********** API **********/
 Rocket.prototype.throttle = function() {
-    this.velocity.speed += this.thrust;
+    var polarAcceleration = {
+        speed: this.thrust,
+        angle: this.direction
+    };
+    var axialAcceleration = this.getAxialForm(polarAcceleration);
+
+    var axialVelocity = this.getAxialForm(this.velocity);
+    axialVelocity.x += axialAcceleration.x;
+    axialVelocity.y += axialAcceleration.y;
+
+    this.velocity = this.getPolarForm(axialVelocity);
+
     if (this.velocity.speed > this.maxSpeed) {
         this.velocity.speed = this.maxSpeed;
     }
@@ -72,13 +83,13 @@ Rocket.prototype.accountInertia = function() {
 
 // CHANGE!
 Rocket.prototype.accountGravity = function() {
-    var axialVelocity = this.getAxialVelocity(this.velocity);
+    var axialVelocity = this.getAxialForm(this.velocity);
     axialVelocity.y += this.gravity;
-    this.velocity = this.getPolarVelocity(axialVelocity);
+    this.velocity = this.getPolarForm(axialVelocity);
 };
 
 Rocket.prototype.updatePosition = function() {
-    var axialVelocity = this.getAxialVelocity(this.velocity);
+    var axialVelocity = this.getAxialForm(this.velocity);
 
     this.x += axialVelocity.x;
     if (this.x < 0) {
@@ -93,7 +104,7 @@ Rocket.prototype.updatePosition = function() {
     // check the other edge as well
 };
 
-Rocket.prototype.getAxialVelocity = function(polarVelocity) {
+Rocket.prototype.getAxialForm = function(polarVelocity) {
     var result = {};
     result.x = Math.sin(Math.PI/180 * polarVelocity.angle) * polarVelocity.speed;
     // must negate speed because upwards is negative, but 0 degree angle is upwards
@@ -101,14 +112,14 @@ Rocket.prototype.getAxialVelocity = function(polarVelocity) {
     return result;
 };
 
-Rocket.prototype.getPolarVelocity = function(axialVelocity) {
+Rocket.prototype.getPolarForm = function(axialVelocity) {
     var result = {};
-    result.speed = this.getPolarSpeed(axialVelocity.x, axialVelocity.y);
+    result.speed = this.getPolarMagnitude(axialVelocity.x, axialVelocity.y);
     result.angle = this.getPolarAngle(axialVelocity.x, axialVelocity.y);
     return result;
 };
 
-Rocket.prototype.getPolarSpeed = function(x, y) {
+Rocket.prototype.getPolarMagnitude = function(x, y) {
     return Math.sqrt(x * x + y * y);
 };
 
