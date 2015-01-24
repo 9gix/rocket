@@ -18,19 +18,17 @@ function Rocket(x, y, angle) {
     this.maxSpeed;
     this.gravity;  // define here?
 
-    this.angle = angle || 0;  // in degree, 0 is facing (?) TODO(digawp)
-
     this.x = x;
     this.y = y;
 
-    this.velocity = {
+    this.velocity = {  // in polar velocity form
         speed: 0,
-        alpha: angle  // angle or 0?
+        angle: angle || 0  // in degree, 0 is facing upwards
     };
 
     this.isThrottling = false;
-    this.isRotatingCCW = false;
-    this.isRotatingCW = false;
+    this.isRotatingLeft = false;
+    this.isRotatingRight = false;
 }
 
 /********** API **********/
@@ -42,20 +40,20 @@ Rocket.prototype.stopThrottle = function() {
     this.isThrottling = false;
 };
 
-Rocket.prototype.rotateCCW = function() {
-    this.isRotatingCCW = true;
+Rocket.prototype.rotateLeft = function() {
+    this.isRotatingLeft = true;
 };
 
-Rocket.prototype.stopRotateCCW = function() {
-    this.isRotatingCCW = false;
+Rocket.prototype.stopRotateLeft = function() {
+    this.isRotatingLeft = false;
 };
 
-Rocket.prototype.rotateCW = function() {
-    this.isRotatingCW = true;
+Rocket.prototype.rotateRight = function() {
+    this.isRotatingRight = true;
 };
 
-Rocket.prototype.stopRotateCW = function() {
-    this.isRotatingCW = false;
+Rocket.prototype.stopRotateRight = function() {
+    this.isRotatingRight = false;
 };
 
 Rocket.prototype.update = function() {
@@ -63,6 +61,14 @@ Rocket.prototype.update = function() {
     this.accountGravity();
     this.accountCommand();
     this.updatePosition();
+};
+
+Rocket.prototype.getX = function() {
+    return this.x;
+};
+
+Rocket.prototype.getY = function() {
+    return this.y;
 };
 
 /********** private methods **********/
