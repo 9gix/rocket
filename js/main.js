@@ -4,45 +4,40 @@ var RocketGame = (function(){
 
     var fps = 60;
     var interval = 1000 / fps;
-    var gc = new GameController();
+    var canvas = document.getElementById('rocket-canvas');
+    var context = canvas.getContext('2d');
+    var rocket = new Rocket();
+    var space = new Space(rocket);
+    var gc = new GameController(space);
+    var spaceview = new SpaceView(context, space);
 
     document.addEventListener("DOMContentLoaded", function(event){
         initGame();
     });
 
     var initGame = function(){
-        initEventListener();
+        spaceview.initEventListener();
         startGameLoop();
     };
 
-    var initEventListener = function(){
-        document.addEventListener("keydown", function(event){
-            switch (event.keyCode || event.which){
-                case 38: // ArrowUp
-                    console.log("Up");
-                    gc.throttle();
-                    break;
-                case 37: // ArrowLeft
-                    console.log("Left");
-                    gc.turnLeft();
-                    break;
-                case 39: // ArrowRight
-                    console.log("Right");
-                    gc.turnRight();
-                    break;
-            };
-        });
-    };
 
     var render = function(){
         // Render Logic
-
-
+        spaceview.render();
         window.requestAnimationFrame(render);
     };
 
     var gameLogic = function(){
         // Game Logic
+        if (spaceview.command.throttle){
+            gc.throttle();
+        }
+        if (spaceview.command.left){
+            gc.rotateLeft();
+        }
+        if (spaceview.command.right){
+            gc.rotateRight();
+        }
 
         setTimeout(gameLogic, interval);
     };
