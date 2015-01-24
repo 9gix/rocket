@@ -41,6 +41,8 @@ var RocketGame = (function(){
             gc.rotateRight();
         }
 
+        gc.update();
+
         setTimeout(gameLogic, interval);
     };
 

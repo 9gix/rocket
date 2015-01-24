@@ -22,7 +22,7 @@ function Rocket(x, y, angle) {
     this.width = 25;
     this.height = 25;
 
-    this.gravity = 1;  // define here?
+    this.gravity = 0.1;  // define here?
 
 
     this.x = x;  // rightward is positive
@@ -48,6 +48,7 @@ Rocket.prototype.stopThrottle = function() {
 };
 
 Rocket.prototype.rotateLeft = function() {
+    console.log("LEFT");
     this.isRotatingLeft = true;
 };
 
@@ -68,8 +69,6 @@ Rocket.prototype.update = function() {
     this.accountGravity();
     this.accountCommand();
     this.updatePosition();
-    console.log("X: " + this.x);
-    console.log("Y: " + this.y);
 };
 
 Rocket.prototype.getX = function() {
@@ -99,10 +98,10 @@ Rocket.prototype.accountCommand = function() {
         this.velocity.speed += this.thrust;
     }
     if (this.isRotatingLeft) {
-        this.angle -= this.manouvre;
+        this.velocity.angle -= this.manouvre;
     }
     if (this.isRotatingRight) {
-        this.angle += this.manouvre;
+        this.velocity.angle += this.manouvre;
     }
 };
 
