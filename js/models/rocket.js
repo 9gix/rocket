@@ -77,19 +77,19 @@ Rocket.prototype.getAngle = function() {
     return this.direction;
 };
 
+// To be called only by models/space.js
+Rocket.prototype.accountGravity = function(gravity) {
+    var axialVelocity = this.getAxialForm(this.velocity);
+    axialVelocity.y += gravity;
+    this.velocity = this.getPolarForm(axialVelocity);
+};
+
 /********** private methods **********/
 Rocket.prototype.accountInertia = function() {
     this.velocity.speed -= this.inertia;
     if (this.velocity.speed < 0) {
         this.velocity.speed = 0;
     }
-};
-
-// CHANGE!
-Rocket.prototype.accountGravity = function() {
-    var axialVelocity = this.getAxialForm(this.velocity);
-    axialVelocity.y += this.gravity;
-    this.velocity = this.getPolarForm(axialVelocity);
 };
 
 Rocket.prototype.updatePosition = function() {

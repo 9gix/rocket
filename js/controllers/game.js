@@ -17,5 +17,5 @@ GameController.prototype.rotateRight = function(){
 }
 
 GameController.prototype.update = function(){
-    this.space.rocket.update();
+    this.space.update();
 };
