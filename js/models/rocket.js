@@ -68,6 +68,8 @@ Rocket.prototype.update = function() {
     this.accountGravity();
     this.accountCommand();
     this.updatePosition();
+    console.log("X: " + this.x);
+    console.log("Y: " + this.y);
 };
 
 Rocket.prototype.getX = function() {
@@ -136,8 +138,7 @@ Rocket.prototype.getPolarVelocity = function(axialVelocity) {
 };
 
 Rocket.prototype.getPolarSpeed = function(x, y) {
-    return Math.sqrt(axialVelocity.x * axialVelocity.x +
-        axialVelocity.y * axialVelocity.y);
+    return Math.sqrt(x * x + y * y);
 };
 
 Rocket.prototype.getPolarAngle = function(x, y) {
