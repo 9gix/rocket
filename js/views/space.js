@@ -11,6 +11,7 @@ function SpaceView(context, space){
 }
 
 SpaceView.prototype.render = function(){
+    this.context.clearRect(0, 0, 1024, 640);
     this.context.fillStyle = "red";
     this.context.fillRect(this.space.rocket.getX(), this.space.rocket.getY(), 25, 25);
 };
