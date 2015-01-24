@@ -15,8 +15,8 @@
  */
 function Rocket(x, y, angle) {
     // constants
-    this.thrust = 1;
-    this.inertia = 0.5;  // or friction/air resistance?
+    this.thrust = 1.2;
+    this.inertia = 0.51;  // or friction/air resistance?
     this.manouvre = 3;
     this.maxSpeed = 10;
     this.width = 25;

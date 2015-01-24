@@ -1,6 +1,6 @@
 function Space(rocket){
     this.rocket = rocket;
-    this.gravity = 0.3;
+    this.gravity = 0.52
 }
 
 Space.prototype.update = function() {
