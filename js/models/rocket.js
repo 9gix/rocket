@@ -15,11 +15,15 @@
  */
 function Rocket(x, y, angle) {
     // constants
-    this.thrust;
-    this.inertia;  // or friction/air resistance?
-    this.manouvre;
-    this.maxSpeed;
-    this.gravity;  // define here?
+    this.thrust = 1;
+    this.inertia = 0.5;  // or friction/air resistance?
+    this.manouvre = 3;
+    this.maxSpeed = 10;
+    this.width = 25;
+    this.height = 25;
+
+    this.gravity = 1;  // define here?
+
 
     this.x = x;  // rightward is positive
     this.y = y;  // downward is positive
@@ -119,8 +123,8 @@ Rocket.prototype.updatePosition = function() {
 Rocket.prototype.getAxialVelocity = function(polarVelocity) {
     var result = {};
     result.x = Math.sin(Math.PI/180 * polarVelocity.angle) * polarVelocity.speed;
-    // TODO(digawp): why need negative in parquer?
-    result.y = Math.cos(Math.PI/180 * polarVelocity.angle) * polarVelocity.speed;
+    // must negate speed because upwards is negative, but 0 degree angle is upwards
+    result.y = Math.cos(Math.PI/180 * polarVelocity.angle) * -polarVelocity.speed;
     return result;
 };
 
