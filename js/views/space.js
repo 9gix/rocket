@@ -16,7 +16,6 @@ SpaceView.prototype.render = function(){
 };
 
 SpaceView.prototype.renderRocket = function(){
-    console.log(this.space.rocket);
     var ctx = this.context;
     ctx.save();
     ctx.translate(this.space.rocket.getX(), this.space.rocket.getY());

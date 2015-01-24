@@ -9,7 +9,6 @@ GameController.prototype.throttle = function(){
 }
 
 GameController.prototype.rotateLeft = function(){
-    console.log("ROT");
     this.space.rocket.rotateLeft();
 }
 

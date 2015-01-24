@@ -74,7 +74,7 @@ Rocket.prototype.getY = function() {
 };
 
 Rocket.prototype.getAngle = function() {
-    return this.velocity.angle;
+    return this.direction;
 };
 
 /********** private methods **********/
