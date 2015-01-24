@@ -12,8 +12,28 @@ function SpaceView(context, space){
 
 SpaceView.prototype.render = function(){
     this.context.clearRect(0, 0, 1024, 640);
-    this.context.fillStyle = "red";
-    this.context.fillRect(this.space.rocket.getX(), this.space.rocket.getY(), 25, 25);
+    this.renderRocket()
+};
+
+SpaceView.prototype.renderRocket = function(){
+    console.log(this.space.rocket);
+    var ctx = this.context;
+    ctx.save();
+    ctx.translate(this.space.rocket.getX(), this.space.rocket.getY());
+    ctx.rotate(Math.PI/180 * this.space.rocket.getAngle());
+    ctx.strokeStyle = 'red';
+    ctx.fillStyle = 'red';
+    var width = 10;
+    var height = 30;
+    var offset = 6;
+    ctx.beginPath();
+    ctx.moveTo(width,0);
+    ctx.lineTo(0,height);
+    ctx.bezierCurveTo(offset,height-offset,2*width-offset,height-offset,2*width,height);
+    ctx.lineTo(width,0);
+    ctx.stroke();
+    ctx.fill();
+    ctx.restore();
 };
 
 SpaceView.prototype.initEventListener = function(){

@@ -73,6 +73,10 @@ Rocket.prototype.getY = function() {
     return this.y;
 };
 
+Rocket.prototype.getAngle = function() {
+    return this.velocity.angle;
+};
+
 /********** private methods **********/
 Rocket.prototype.accountInertia = function() {
     this.velocity.speed -= this.inertia;
