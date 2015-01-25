@@ -19,11 +19,14 @@ SpaceView.prototype.render = function(){
 };
 
 SpaceView.prototype.renderRocket = function(){
-    if(!this.space.rocket.isAlive) return;
+    var rocket = this.space.rocket;
+    if(!rocket.isAlive) return;
     var ctx = this.context;
     ctx.save();
-    ctx.translate(this.space.rocket.getX() - 10, this.space.rocket.getY()-20);
-    ctx.rotate(Math.PI/180 * this.space.rocket.getAngle());
+    ctx.translate(
+            rocket.getX() - (rocket.getWidth() / 2),
+            rocket.getY() - (rocket.getHeight() / 2));
+    ctx.rotate(Math.PI/180 * rocket.getAngle());
     ctx.strokeStyle = 'white';
     ctx.fillStyle = 'white';
     var width = 10;

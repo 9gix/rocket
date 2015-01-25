@@ -20,7 +20,7 @@ function Rocket(x, y, angle) {
     this.height = 20;
     this.thrust = 0.03;
     this.manouvre = 3;
-    this.maxSpeed = 3;
+    this.maxSpeed = 2;
 
     this.x = x;  // rightward is positive
     this.y = y;  // downward is positive
@@ -86,6 +86,14 @@ Rocket.prototype.getX = function() {
 
 Rocket.prototype.getY = function() {
     return this.y;
+};
+
+Rocket.prototype.getWidth = function() {
+    return this.width;
+};
+
+Rocket.prototype.getHeight = function() {
+    return this.height;
 };
 
 Rocket.prototype.getAngle = function() {
