@@ -36,18 +36,18 @@ function ThrustEffect(x, y, angle) {
 }
 
 ThrustEffect.prototype.update = function() {
-    this.delta -= 0.5;
+    this.delta -= 0.03;
     if(this.delta == 0) this.isAlive = false;
 }
 
 ThrustEffect.prototype.render = function(g) {
     if(!this.isAlive) return;
     g.save();
-    g.strokeStyle = "rgba(255,255,255," + this.delta + ")";
+    g.strokeStyle = "rgba(255,253,200," + this.delta + ")";
     g.translate(this.x, this.y);
     g.rotate(this.angle /180 * Math.PI);
     g.beginPath();
-    g.arc(0,0,40, 0.33 * Math.PI, 0.66 *  Math.PI);
+    g.arc(0,0,20 + (1-this.delta)*140, 0.40 * Math.PI, 0.60 *  Math.PI);
     g.stroke();
     g.restore();
 }

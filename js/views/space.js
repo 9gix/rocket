@@ -23,9 +23,7 @@ SpaceView.prototype.renderRocket = function(){
     if(!rocket.isAlive) return;
     var ctx = this.context;
     ctx.save();
-    ctx.translate(
-            rocket.getX() - (rocket.getWidth() / 2),
-            rocket.getY() - (rocket.getHeight() / 2));
+    ctx.translate(rocket.getX(), rocket.getY());
     ctx.rotate(Math.PI/180 * rocket.getAngle());
     ctx.strokeStyle = 'white';
     ctx.fillStyle = 'white';
@@ -33,10 +31,10 @@ SpaceView.prototype.renderRocket = function(){
     var height = 30;
     var offset = 6;
     ctx.beginPath();
-    ctx.moveTo(width,0);
-    ctx.lineTo(0,height);
-    ctx.bezierCurveTo(offset,height-offset,2*width-offset,height-offset,2*width,height);
-    ctx.lineTo(width,0);
+    ctx.moveTo(width-width, 0  - height/2);
+    ctx.lineTo(0-width, height);
+    ctx.bezierCurveTo(offset-width,height-offset,2*width-offset-width,height-offset,2*width-width,height);
+    //ctx.lineTo(width,0);
     ctx.stroke();
     ctx.fill();
     ctx.restore();

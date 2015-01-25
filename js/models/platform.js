@@ -30,7 +30,7 @@ Platform.prototype.getY = function(){
 };
 
 Platform.prototype.collissionHandler = function(rocket) {
-    var rocketBRect = new BoundingRectangle(rocket.x, rocket.y, rocket.width, rocket.height);
+    var rocketBRect = new BoundingRectangle(rocket.x, rocket.y + 20, rocket.width, rocket.height);
     var collided = this.collidesWith(rocketBRect);
     if(collided){
         rocket.velocity.speed = 0;
@@ -49,3 +49,5 @@ Platform.prototype.render = function(g) {
     g.fillRect(-this.width/2, -this.height/2, this.width, this.height);
     g.restore();
 };
+
+Platform.prototype.update = function() {};
