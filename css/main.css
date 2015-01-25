@@ -8,3 +8,12 @@ body {
     left: 0;
     right: 0;
 }
+
+
+#announcer {
+	opacity : 0;
+	color : white;
+	font-size: 2em;
+	transition: opacity 0.3s;
+	-moz-transition: opacity 0.3s;
+}

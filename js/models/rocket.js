@@ -31,6 +31,7 @@ function Rocket(x, y, angle) {
         angle: angle || 0  // in degree, 0 is facing upwards
     };
     this.isAlive = true;
+    this.landedSafely = false;
 }
 
 /*************************/

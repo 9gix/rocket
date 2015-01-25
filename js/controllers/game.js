@@ -19,4 +19,14 @@ GameController.prototype.rotateRight = function(){
 GameController.prototype.update = function(){
     this.space.update();
 	this.space.collisionCheck();
+	
 };
+
+GameController.prototype.prepareSpace = function() {
+
+}
+
+
+GameController.prototype.levelCompleted = function (){
+
+}

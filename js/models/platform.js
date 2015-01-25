@@ -36,6 +36,8 @@ Platform.prototype.collissionHandler = function(rocket) {
         rocket.velocity.speed = 0;
         if(rocket.velocity.speed > this.speedLimit) {
             rocket.setDead();
+        } else {
+            rocket.landedSafely = true;
         }
     }
 };

@@ -20,7 +20,6 @@ var RocketGame = (function(){
     space.setSprites(sprites);
     var assetManager;
     var soundEngine = new SoundEngine();
-
     document.addEventListener("DOMContentLoaded", function(event){
         initGame();
     });
@@ -40,6 +39,7 @@ var RocketGame = (function(){
     var gameLogic = function(){
         // Game Logic
         if (spaceview.command.throttle){
+            space.insertSprite(new ThrustEffect(space.rocket.x, space.rocket.y, space.rocket.getAngle()));
             gc.throttle();
             soundEngine.startRocket();
         } else {
