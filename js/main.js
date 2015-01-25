@@ -16,6 +16,8 @@ var RocketGame = (function(){
     var space = new Space(rocket, [start_platform, end_platform]);
     var gc = new GameController(space);
     var spaceview = new SpaceView(context, space);
+    var assetManager;
+    var soundEngine = new SoundEngine();
 
     document.addEventListener("DOMContentLoaded", function(event){
         initGame();
@@ -37,12 +39,18 @@ var RocketGame = (function(){
         // Game Logic
         if (spaceview.command.throttle){
             gc.throttle();
+            soundEngine.startRocket();
+        } else {
+            soundEngine.stopRocket();
         }
+
         if (spaceview.command.left){
             gc.rotateLeft();
+            soundEngine.startLeftRocket();
         }
         if (spaceview.command.right){
             gc.rotateRight();
+            soundEngine.startRightRocket();
         }
 
         gc.update();
