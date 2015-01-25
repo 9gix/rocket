@@ -1,8 +1,16 @@
-function Space(rocket, platforms){
+function Space(rocket){
+    this.sprites = [];
     this.rocket = rocket;
-    this.platforms = platforms;
     this.gravity = 0.01;
-    this.drag = 0.0005;
+    this.drag = 0.0010;
+}
+
+Space.prototype.setSprites = function(arrayOfSprites) {
+    this.sprites = arrayOfSprites;
+}
+
+Space.prototype.insertSprite = function(sprite) {
+    this.sprites.push(sprite);
 }
 
 Space.prototype.update = function() {
@@ -10,3 +18,9 @@ Space.prototype.update = function() {
     this.rocket.accountDrag(this.drag);
     this.rocket.update();
 };
+
+Space.prototype.collisionCheck = function() {
+    for (var i = 0; i < this.sprites.length; ++i) {
+        this.sprites[i].collissionHandler(this.rocket);
+    }
+}

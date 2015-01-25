@@ -18,4 +18,5 @@ GameController.prototype.rotateRight = function(){
 
 GameController.prototype.update = function(){
     this.space.update();
+	this.space.collisionCheck();
 };

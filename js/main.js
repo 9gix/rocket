@@ -8,14 +8,16 @@ var RocketGame = (function(){
     canvas.width = 1000;
     canvas.height = 500;
     var context = canvas.getContext('2d');
-
-
-    var rocket = new Rocket(100, 380);
-    var start_platform = new Platform(100, 415);
-    var end_platform = new Platform(600, 200);
-    var space = new Space(rocket, [start_platform, end_platform]);
+    var rocket = new Rocket(40, 390);
+    var space = new Space(rocket);
     var gc = new GameController(space);
     var spaceview = new SpaceView(context, space);
+    var sprites = [];
+    var start_platform = new Platform(40, 415);
+    var end_platform = new Platform(600, 200);
+    sprites.push(start_platform);
+    sprites.push(end_platform);
+    space.setSprites(sprites);
     var assetManager;
     var soundEngine = new SoundEngine();
 
