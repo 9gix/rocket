@@ -47,10 +47,15 @@ var RocketGame = (function(){
         if (spaceview.command.left){
             gc.rotateLeft();
             soundEngine.startLeftRocket();
+        } else {
+            soundEngine.stopLeftRocket();
         }
+
         if (spaceview.command.right){
             gc.rotateRight();
             soundEngine.startRightRocket();
+        } else {
+            soundEngine.stopRightRocket();
         }
 
         gc.update();
