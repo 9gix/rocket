@@ -15,12 +15,12 @@
  */
 function Rocket(x, y, angle) {
     // constants
-    this.thrust = 1.2;
-    this.inertia = 0.51;  // or friction/air resistance?
+    this.thrust = 3.5;
+    this.inertia = 0.021;  // or friction/air resistance?
     this.manouvre = 3;
-    this.maxSpeed = 10;
-    this.width = 25;
-    this.height = 25;
+    this.maxSpeed = 8;
+    this.width = 10;
+    this.height = 20;
 
     this.x = x;  // rightward is positive
     this.y = y;  // downward is positive
@@ -30,6 +30,7 @@ function Rocket(x, y, angle) {
         speed: 0,
         angle: angle || 0  // in degree, 0 is facing upwards
     };
+    this.isAlive = true;
 }
 
 /********** API **********/
@@ -41,14 +42,15 @@ Rocket.prototype.throttle = function() {
     var axialAcceleration = this.getAxialForm(polarAcceleration);
 
     var axialVelocity = this.getAxialForm(this.velocity);
-    axialVelocity.x += axialAcceleration.x;
-    axialVelocity.y += axialAcceleration.y;
+    axialVelocity.x = axialAcceleration.x;
+    axialVelocity.y = axialAcceleration.y;
 
     this.velocity = this.getPolarForm(axialVelocity);
 
     if (this.velocity.speed > this.maxSpeed) {
         this.velocity.speed = this.maxSpeed;
     }
+    this.hasThrottled = true;
 };
 
 Rocket.prototype.rotateLeft = function() {
@@ -76,6 +78,10 @@ Rocket.prototype.getY = function() {
 Rocket.prototype.getAngle = function() {
     return this.direction;
 };
+
+Rocket.prototype.setDead = function() {
+    this.isAlive = false;
+}
 
 // To be called only by models/space.js
 Rocket.prototype.accountGravity = function(gravity) {

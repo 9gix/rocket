@@ -12,16 +12,20 @@ function SpaceView(context, space){
 
 SpaceView.prototype.render = function(){
     this.context.clearRect(0, 0, 1024, 640);
-    this.renderRocket()
+    this.renderRocket();
+    for (var i = 0; i < this.space.sprites.length; ++i) {
+        this.space.sprites[i].render(this.context);
+    }
 };
 
 SpaceView.prototype.renderRocket = function(){
+    if(!this.space.rocket.isAlive) return;
     var ctx = this.context;
     ctx.save();
-    ctx.translate(this.space.rocket.getX(), this.space.rocket.getY());
+    ctx.translate(this.space.rocket.getX() - 10, this.space.rocket.getY()-20);
     ctx.rotate(Math.PI/180 * this.space.rocket.getAngle());
-    ctx.strokeStyle = 'red';
-    ctx.fillStyle = 'red';
+    ctx.strokeStyle = 'white';
+    ctx.fillStyle = 'white';
     var width = 10;
     var height = 30;
     var offset = 6;

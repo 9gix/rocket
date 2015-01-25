@@ -8,11 +8,13 @@ var RocketGame = (function(){
     canvas.width = 1000;
     canvas.height = 500;
     var context = canvas.getContext('2d');
-    var rocket = new Rocket(50, 50);
+    var rocket = new Rocket(40, 390);
     var space = new Space(rocket);
     var gc = new GameController(space);
     var spaceview = new SpaceView(context, space);
-
+    var sprites = [];
+    sprites.push(new Platform(40, 350));
+    space.setSprites(sprites);
     document.addEventListener("DOMContentLoaded", function(event){
         initGame();
     });
@@ -34,10 +36,10 @@ var RocketGame = (function(){
         if (spaceview.command.throttle){
             gc.throttle();
         }
-        if (spaceview.command.left){
+        else if (spaceview.command.left){
             gc.rotateLeft();
         }
-        if (spaceview.command.right){
+        else if (spaceview.command.right){
             gc.rotateRight();
         }
 
