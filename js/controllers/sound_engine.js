@@ -61,7 +61,7 @@ SoundEngine.prototype.startLeftRocket = function() {
 
         this.leftRocketGain.connect(this.audioContext.destination);
     }
-    this.leftRocketGain.gain.value = 0.7;
+    this.leftRocketGain.gain.value = 0.04;
 };
 
 SoundEngine.prototype.startRightRocket = function() {
@@ -89,7 +89,7 @@ SoundEngine.prototype.startRightRocket = function() {
 
         this.rightRocketGain.connect(this.audioContext.destination);
     }
-    this.rightRocketGain.gain.value = 0.7;
+    this.rightRocketGain.gain.value = 0.04;
 };
 
 SoundEngine.prototype.stopRightRocket = function() {
