@@ -6,7 +6,7 @@ function Space(rocket, platforms){
 }
 
 Space.prototype.update = function() {
-	this.rocket.accountGravity(this.gravity);
-	this.rocket.accountDrag(this.drag);
-	this.rocket.update();
+    this.rocket.accountGravity(this.gravity);
+    this.rocket.accountDrag(this.drag);
+    this.rocket.update();
 };
