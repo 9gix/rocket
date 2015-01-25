@@ -16,9 +16,8 @@
 function Rocket(x, y, angle) {
     // constants
     this.thrust = 1.2;
-    this.inertia = 0.51;  // or friction/air resistance?
     this.manouvre = 3;
-    this.maxSpeed = 10;
+    this.maxSpeed = 5;
     this.width = 25;
     this.height = 25;
 
@@ -32,7 +31,10 @@ function Rocket(x, y, angle) {
     };
 }
 
+/*************************/
 /********** API **********/
+/*************************/
+
 Rocket.prototype.throttle = function() {
     var polarAcceleration = {
         speed: this.thrust,
@@ -60,9 +62,19 @@ Rocket.prototype.rotateRight = function() {
 };
 
 Rocket.prototype.update = function() {
-    this.accountInertia();
-    // this.accountGravity();
-    this.updatePosition();
+    var axialVelocity = this.getAxialForm(this.velocity);
+
+    this.x += axialVelocity.x;
+    if (this.x < 0) {
+        this.x = 0;
+    }
+    // check the other edge as well
+
+    this.y += axialVelocity.y;
+    if (this.y < 0) {
+        this.y = 0;
+    }
+    // check the other edge as well
 };
 
 Rocket.prototype.getX = function() {
@@ -82,31 +94,22 @@ Rocket.prototype.accountGravity = function(gravity) {
     var axialVelocity = this.getAxialForm(this.velocity);
     axialVelocity.y += gravity;
     this.velocity = this.getPolarForm(axialVelocity);
+    if (this.velocity.speed > this.maxSpeed) {
+        this.velocity.speed = this.maxSpeed;
+    }
 };
 
-/********** private methods **********/
-Rocket.prototype.accountInertia = function() {
-    this.velocity.speed -= this.inertia;
+// To be called only by models/space.js
+Rocket.prototype.accountDrag = function(drag) {
+    this.velocity.speed -= drag;
     if (this.velocity.speed < 0) {
         this.velocity.speed = 0;
     }
 };
 
-Rocket.prototype.updatePosition = function() {
-    var axialVelocity = this.getAxialForm(this.velocity);
-
-    this.x += axialVelocity.x;
-    if (this.x < 0) {
-        this.x = 0;
-    }
-    // check the other edge as well
-
-    this.y += axialVelocity.y;
-    if (this.y < 0) {
-        this.y = 0;
-    }
-    // check the other edge as well
-};
+/*************************************/
+/********** private methods **********/
+/*************************************/
 
 Rocket.prototype.getAxialForm = function(polarVelocity) {
     var result = {};
