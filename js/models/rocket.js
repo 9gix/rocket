@@ -94,6 +94,9 @@ Rocket.prototype.accountGravity = function(gravity) {
     var axialVelocity = this.getAxialForm(this.velocity);
     axialVelocity.y += gravity;
     this.velocity = this.getPolarForm(axialVelocity);
+    if (this.velocity.speed > this.maxSpeed) {
+        this.velocity.speed = this.maxSpeed;
+    }
 };
 
 // To be called only by models/space.js
