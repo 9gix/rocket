@@ -8,8 +8,12 @@ var RocketGame = (function(){
     canvas.width = 1000;
     canvas.height = 500;
     var context = canvas.getContext('2d');
-    var rocket = new Rocket(50, 50);
-    var space = new Space(rocket);
+
+
+    var rocket = new Rocket(100, 380);
+    var start_platform = new Platform(100, 415);
+    var end_platform = new Platform(600, 200);
+    var space = new Space(rocket, [start_platform, end_platform]);
     var gc = new GameController(space);
     var spaceview = new SpaceView(context, space);
 

@@ -13,6 +13,10 @@ function SpaceView(context, space){
 SpaceView.prototype.render = function(){
     this.context.clearRect(0, 0, 1024, 640);
     this.renderRocket()
+
+    for (var i = 0; i < this.space.platforms.length; i++){
+        this.renderPlatform(this.space.platforms[i]);
+    }
 };
 
 SpaceView.prototype.renderRocket = function(){
@@ -33,6 +37,12 @@ SpaceView.prototype.renderRocket = function(){
     ctx.stroke();
     ctx.fill();
     ctx.restore();
+};
+
+SpaceView.prototype.renderPlatform = function(platform){
+    var ctx = this.context;
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(platform.getX() - 15, platform.getY(), 50, 5);
 };
 
 SpaceView.prototype.initEventListener = function(){
