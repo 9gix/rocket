@@ -15,9 +15,9 @@
  */
 function Rocket(x, y, angle) {
     // constants
-    this.thrust = 1.2;
+    this.thrust = 0.03;
     this.manouvre = 3;
-    this.maxSpeed = 5;
+    this.maxSpeed = 3;
     this.width = 25;
     this.height = 25;
 
